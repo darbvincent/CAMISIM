@@ -1,0 +1,149 @@
+onfiguration File Options
+These is a list of all configuration options that are required for CAMISIM to run. Optional arguments are written in italic. The sections, denoted by the words in [brackets] are also required.
+
+[Main]
+seed=
+
+An optional seed to get consistent results, if None is used, random seed is chosen
+phase=
+
+Starting point of the simulation
+0: Full run
+1: Only community design
+2: Start with read simulation
+max_processors=
+
+Maximum number of processors used
+dataset_id=
+
+Name of the created sample
+output_directory=
+
+Output directory
+Will be created if it does not exist.
+Make sure directory is empty before running CAMISIM
+temp_directory=
+
+Path for storing temporary files of CAMISIM
+Make sure enough space is available
+gsa=
+
+Whether a gold standard assembly should be created
+May be True/False or Yes/No
+pooled_gsa=
+
+Whether a pooled gold standard over all samples is created
+True/False/Yes/No
+anonymous=
+
+Whether the output is anonymized
+Also True/False/Yes/No
+Can be computationally expensive
+compress=
+
+Whether the data should be compressed or not
+0 is for no comrepssion, 9 is maximum comporession
+recommended is using compression level 1 at least
+[ReadSimulator]
+readsim=tools/art_illumina-2.3.6/art_illumina
+
+path to the executable of the chosen read simulator
+ART is shipped within CAMISIM at the above relative path
+error_profiles=tools/art_illumina-2.3.6/profiles
+
+Folder containing error profiles for the read simulators
+Might be emoty for some simulators (e.g. NanoSim)
+samtools=tools/samtools-1.3/samtools
+
+Path to samtools executable
+Version 1.3 (recommended) is shipped within CAMISIM
+profile=mbarc
+
+used read simulator error profile
+mbarc is recommended for bacterial communities
+choose for ART: mi/hi/hi150/mbarc
+ignored by other read simulators
+size=
+
+size of a single sample in Gigabasepairs (Gbp)
+actual size, including mapping files, might be larger
+type=
+
+type of the used read simulator
+choose from art/wgsim/nanosim/pbsim
+fragments_size_mean=
+
+mean size of the fragments to be created
+will be ignored by NanoSim
+fragment_size_standard_deviation=
+
+standard deviation of fragments to be created
+will be ignored by NanoSim
+[CommunityDesign]
+distribution_file_paths=
+
+optional path to input abundance files
+files are tsv files of the format genomeTababundance
+One per sample to be created
+ncbi_taxdump=tools/ncbi-taxonomy_20170222.tar.gz
+
+Taxonomy dump form the NCBI
+Working version can be found at the relative path above
+strain_simulation_template=scripts/StrainSimulationWrapper/sgEvolver/simulation_dir
+
+Path to a template.tree for the sgEvolver from the mauve suite
+Example tree is shipped along the sgEvolver itself within CAMISIM
+number_of_samples=
+
+Number of samples to be created
+[community0]
+metadata=
+
+Path of the input metadata tsv file
+file has to be in the format: genome_IDTabOTUTabNCBI_IDTabnovelty_category
+And this line as a header
+id_to_genome_file=
+
+Path to the input genome_to_id tsv file
+format is: genome_IDTabgenome path
+No header
+id_to_gff_file=
+
+Optional file used by the sgEvolver, mapping togene annotations of the input genomes
+genomes_total=
+
+Total number of simulated genomes
+Difference between genomes_total and genomes_real are simulated by sgEvolver
+genomes_real=
+
+Number of genomes used from the input genomes
+max_strains_per_otu=
+
+Maximum number of strains drawn from genomes belonging to a single OTU
+OTU is taken from the metadata file
+ratio=
+
+ratio between different communities
+default: 1, i.e. if only one community is present
+mode=
+
+mode for changing the abundances in different samples
+one of replicates/timeseries_lognormal/timeseries_normal/differential
+log_mu=
+
+Mean of the used log-normal distribution
+1 is an empirically good mean
+log_sigma=
+
+standard deviation of the used log-normal distribution
+2 is an empirically good sd
+gauss_mu=
+
+mean of the used normal distribution
+gauss_sigma=
+
+standard deviation of the used normal distribution
+view=
+
+Show the used distribution of genomes before simulating
+default: False
