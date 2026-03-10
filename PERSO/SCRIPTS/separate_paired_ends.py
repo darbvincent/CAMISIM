@@ -1,6 +1,11 @@
 import argparse
 import gzip
 
+"""
+The script takes a anonymous.fast.gz sample fastq file genrated by CAMISIM, and splits it into two R1 and R2 files for paired end analysis
+
+"""
+
 def separate_paired_ends(input_file, output_r1, output_r2):
     with gzip.open(input_file, 'rt') as f_in, \
          gzip.open(output_r1, 'wt') as f_r1, \
